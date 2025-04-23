@@ -145,6 +145,27 @@ function readPositionFromFile()
     end
 end
 
+function ensureFuel(minFuel)
+    minFuel = minFuel or 100 -- default buffer if not specified
+    if turtle.getFuelLevel() == "unlimited" then
+        return true
+    end
+
+    while turtle.getFuelLevel() < minFuel do
+        for i = 1, 16 do
+            turtle.select(i)
+            if turtle.refuel(1) then
+                break
+            end
+        end
+
+        if turtle.getFuelLevel() < minFuel then
+            print("Out of fuel! Insert fuel and press Enter...")
+            io.read()
+        end
+    end
+end
+
 function returnToStart()
     -- First align Y (up/down)
     while position.y > 0 do
@@ -186,21 +207,24 @@ end
 
 
 
-function tableContains(table, value)
-    for _, v in ipairs(table) do
+function tableContains(tbl, value)
+    for _, v in ipairs(tbl) do
         if v == value then
             return true
         end
     end
+    return false -- <- was missing!
 end
 
 function selectTrashBlock()
     for i = 1, 16 do
-        if tableContains(trashBlocks, turtle.getItemDetail(i)['name']) then
+        local item = turtle.getItemDetail(i)
+        if item and tableContains(trashBlocks, item.name) then
             turtle.select(i)
-            return
+            return true
         end
     end
+    return false -- none found
 end
 
 function minePlayerShaft(length)
@@ -209,8 +233,11 @@ function minePlayerShaft(length)
         moveForwardDigging()
         turtle.digUp()
         if not turtle.detectDown() then
-            selectTrashBlock()
-            turtle.placeDown()
+            if selectTrashBlock() then
+                turtle.placeDown()
+            else
+                print("No trash blocks to place underfoot. Skipping.")
+            end
         end
     end
 end
@@ -218,6 +245,7 @@ end
 -- TODO: Allow selection of turn direction
 function stripMine(stripCount, stripLength)
     for i = 1, stripCount do
+        ensureFuel(100)
         minePlayerShaft(stripLength)
 
         if i < stripCount then  -- Only move over if not on final strip
