@@ -1,9 +1,11 @@
--- TODO: Handle full inventory
--- TODO: Move to original position on various conditions
--- TODO: Move back to working position after inventory is dumped
+
 -- TODO: Optionally place torches
 -- TODO: Set a "resting" position or hub spot
 -- TODO: Handle refueling
+-- TODO: Handle lava
+-- TODO: Filter denying certain fuels (torches, etc)
+-- TODO: Filter denying certain blocks (Tuff, etc)
+
 
 local trashBlocks = {
     "minecraft:cobblestone",
@@ -232,6 +234,15 @@ function returnToStart()
 
     -- Final orientation
     faceDirection("north")
+end
+
+function isInventoryFull()
+    for i = 1, 16 do
+        if turtle.getItemCount(i) == 0 then
+            return false
+        end
+    end
+    return true
 end
 
 
