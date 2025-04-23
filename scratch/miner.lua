@@ -138,10 +138,10 @@ function moveDown()
 end
 
 function moveForwardDigging(mineAbove)
-    local mineAbove = mineAbove or true
+    local minePathUp = mineAbove or true
     while not turtle.forward() do
         turtle.dig()
-        if mineAbove then
+        if minePathUp then
             turtle.digUp()
         end
         sleep(0.4) -- slight delay to avoid spamming
