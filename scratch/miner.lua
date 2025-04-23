@@ -206,12 +206,9 @@ end
 function minePlayerShaft(length)
     for i = 1, length do
         turtle.dig()
-        while not turtle.forward() do
-            turtle.dig()
-        end
-        moveForward()
+        moveForwardDigging()
         turtle.digUp()
-        if turtle.detectDown() == false then
+        if not turtle.detectDown() then
             selectTrashBlock()
             turtle.placeDown()
         end
@@ -223,9 +220,17 @@ function stripMine(stripCount, stripLength)
     for i = 1, stripCount do
         minePlayerShaft(stripLength)
 
-        turnRight()
-        minePlayerShaft(3)
-        turnRight()
+        if i < stripCount then  -- Only move over if not on final strip
+            if i % 2 == 1 then
+                turnRight()
+                minePlayerShaft(3)
+                turnRight()
+            else
+                turnLeft()
+                minePlayerShaft(3)
+                turnLeft()
+            end
+        end
     end
     returnToStart()
 end
