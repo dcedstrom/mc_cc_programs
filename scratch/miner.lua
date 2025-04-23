@@ -33,6 +33,20 @@ function faceChest()
     faceDirection(chestDirection)
 end
 
+function dumpInventoryAboveChest()
+    -- Step 1: Move above chest
+    -- TODO: Since above instead of facing chest direction, need to adjust position
+    goTo(0, 1, 0, chestDirection)  -- go to (0,1,0), facing chest
+
+    -- Step 2: Drop items downward into chest
+    for i = 1, 16 do
+        turtle.select(i)
+        turtle.dropDown()
+    end
+
+    -- Optional: return to exact (0,1,0), or let goTo(nextPos) handle it
+end
+
 function dumpInventory()
     faceChest()
     for i = 1, 16 do
@@ -123,9 +137,13 @@ function moveDown()
     end
 end
 
-function moveForwardDigging()
+function moveForwardDigging(mineAbove)
+    local mineAbove = mineAbove or true
     while not turtle.forward() do
         turtle.dig()
+        if mineAbove then
+            turtle.digUp()
+        end
         sleep(0.4) -- slight delay to avoid spamming
     end
 
@@ -330,7 +348,7 @@ function stripMine(stripCount, stripLength, startRight)
             saveWorkingPosition()
             local workPos = loadWorkingPosition()
             returnToStart()
-            dumpInventory()
+            dumpInventoryAboveChest()
             goTo(workPos.x, workPos.y, workPos.z, workPos.dir)
         end
 
