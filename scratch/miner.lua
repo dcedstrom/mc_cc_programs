@@ -236,4 +236,4 @@ function stripMine(stripCount, stripLength)
 end
 
 
-stripMine(arg[1], arg[2])
+stripMine(tonumber(arg[1]), tonumber(arg[2]))
