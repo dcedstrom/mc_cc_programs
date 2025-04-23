@@ -25,6 +25,21 @@ local position = {
     z = 0
 }
 
+local chestDirection = "west" -- which side relative to starting face is the chest?
+
+function faceChest()
+    faceDirection(chestDirection)
+end
+
+function dumpInventory()
+    faceChest()
+    for i = 1, 16 do
+        turtle.select(i)
+        turtle.drop()
+    end
+    faceDirection("north")
+end
+
 function writePositionToFile()
     local file = io.open("currentPosition.txt", "w")
     file:write(position.x .. "," .. position.y .. "," .. position.z .. "," .. getCurrentDirection())
@@ -36,6 +51,20 @@ function writeStartingPosition()
     local file = io.open("startingPosition.txt", "w")
     file:write(startingPosition.x .. "," .. startingPosition.y .. "," .. startingPosition.z)
     file:close()
+end
+
+function saveWorkingPosition()
+    local file = io.open("lastWorkingPos.txt", "w")
+    file:write(position.x .. "," .. position.y .. "," .. position.z .. "," .. getCurrentDirection())
+    file:close()
+end
+
+function loadWorkingPosition()
+    local file = io.open("lastWorkingPos.txt", "r")
+    local content = file:read("*a")
+    file:close()
+    local x, y, z, dir = string.match(content, "(%-?%d+),(%-?%d+),(%-?%d+),(%a+)")
+    return {x = tonumber(x), y = tonumber(y), z = tonumber(z), dir = dir}
 end
 
 function turnLeft()
@@ -227,6 +256,47 @@ function selectTrashBlock()
     return false -- none found
 end
 
+function goTo(targetX, targetY, targetZ, finalDirection)
+    -- Move vertically first
+    while position.y < targetY do
+        moveUpDigging()
+    end
+    while position.y > targetY do
+        moveDownDigging()
+    end
+
+    -- Move in X direction
+    if position.x < targetX then
+        faceDirection("east")
+        for i = 1, targetX - position.x do
+            moveForwardDigging()
+        end
+    elseif position.x > targetX then
+        faceDirection("west")
+        for i = 1, position.x - targetX do
+            moveForwardDigging()
+        end
+    end
+
+    -- Move in Z direction
+    if position.z < targetZ then
+        faceDirection("south")
+        for i = 1, targetZ - position.z do
+            moveForwardDigging()
+        end
+    elseif position.z > targetZ then
+        faceDirection("north")
+        for i = 1, position.z - targetZ do
+            moveForwardDigging()
+        end
+    end
+
+    -- Optional: face final direction
+    if finalDirection then
+        faceDirection(finalDirection)
+    end
+end
+
 function minePlayerShaft(length)
     for i = 1, length do
         turtle.dig()
@@ -243,13 +313,22 @@ function minePlayerShaft(length)
 end
 
 -- TODO: Allow selection of turn direction
-function stripMine(stripCount, stripLength)
+function stripMine(stripCount, stripLength, startRight)
     for i = 1, stripCount do
-        ensureFuel(100)
+        if isInventoryFull() then
+            saveWorkingPosition()
+            local workPos = loadWorkingPosition()
+            returnToStart()
+            dumpInventory()
+            goTo(workPos.x, workPos.y, workPos.z, workPos.dir)
+        end
+
         minePlayerShaft(stripLength)
 
-        if i < stripCount then  -- Only move over if not on final strip
-            if i % 2 == 1 then
+        if i < stripCount then
+            local turnRightFirst = (i % 2 == 1 and startRight) or (i % 2 == 0 and not startRight)
+
+            if turnRightFirst then
                 turnRight()
                 minePlayerShaft(3)
                 turnRight()
@@ -260,8 +339,9 @@ function stripMine(stripCount, stripLength)
             end
         end
     end
+
     returnToStart()
 end
 
-
-stripMine(tonumber(arg[1]), tonumber(arg[2]))
+local startRight = arg[3] == "true"
+stripMine(tonumber(arg[1]), tonumber(arg[2]), startRight)
