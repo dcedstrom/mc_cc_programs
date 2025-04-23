@@ -139,16 +139,28 @@ end
 
 function moveForwardDigging(mineAbove)
     if mineAbove == nil then
-        mineAbove = true  -- only default if not explicitly false
-    end
-    while not turtle.forward() do
-        turtle.dig()
-        if mineAbove then
-            turtle.digUp()
-        end
-        sleep(0.4) -- slight delay to avoid spamming
+        mineAbove = true
     end
 
+    local moved = turtle.forward()
+    if not moved then
+        while not turtle.forward() do
+            turtle.dig()
+            if mineAbove then
+                print("Trying to dig up...")
+                turtle.digUp()
+            end
+            sleep(0.4)
+        end
+    else
+        -- If it moved right away, still clear headroom if desired
+        if mineAbove then
+            print("Digging up on clean move...")
+            turtle.digUp()
+        end
+    end
+
+    -- Update position
     local dir = getCurrentDirection()
     if dir == "north" then
         position.z = position.z - 1
