@@ -1,4 +1,4 @@
-local json = require("json")
+-- local json = require("json")
 
 
 local function loadUrls(filename)
@@ -10,7 +10,7 @@ local function loadUrls(filename)
     local content = file.readAll()
     file.close()
 
-    local parsed = json.decode(content)
+    local parsed = textutils.unserializeJSON(content)
     return parsed.urls
 end
 
@@ -24,7 +24,7 @@ local function loadTasks(filename)
     local content = file.readAll()
     file.close()
 
-    local parsed = json.decode(content)
+    local parsed = textutils.unserializeJSON(content)
     return parsed.tasks
 end
 
