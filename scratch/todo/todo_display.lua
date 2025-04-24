@@ -5,8 +5,8 @@
 local basePath = shell.dir()
 
 local function loadUrls(filename)
-    print("Loading urls from " .. fs.combine(basePath, filename))
     local fp = filename or "urls.json"
+    print("Loading urls from " .. fs.combine(basePath, fp))
     local file = fs.open(fs.combine(basePath, fp), "r")
     if not file then
         error("Failed to open file")
@@ -15,12 +15,12 @@ local function loadUrls(filename)
     file.close()
 
     local parsed = textutils.unserializeJSON(content)
-    return parsed.urls
+    return parsed
 end
 
 local function loadTasks(filename)
-    print("Loading tasks from " .. fs.combine(basePath, filename))
-    local fp = filename or "todo.json"
+    local fp = filename or "tasks.json"
+    print("Loading tasks from " .. fs.combine(basePath, fp))
     local file = fs.open(fs.combine(basePath, fp), "r")
     if not file then
         error("Failed to open file")
