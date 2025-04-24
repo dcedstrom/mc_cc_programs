@@ -1,9 +1,13 @@
 -- local json = require("json")
 
 
+-- TODO: Should this always be relative or should main() take a path optionally?
+local basePath = shell.dir()
+
 local function loadUrls(filename)
+    print("Loading urls from " .. fs.combine(basePath, filename))
     local fp = filename or "urls.json"
-    local file = fs.open(fp, "r")
+    local file = fs.open(fs.combine(basePath, fp), "r")
     if not file then
         error("Failed to open file")
     end
@@ -15,8 +19,9 @@ local function loadUrls(filename)
 end
 
 local function loadTasks(filename)
+    print("Loading tasks from " .. fs.combine(basePath, filename))
     local fp = filename or "todo.json"
-    local file = fs.open(fp, "r")
+    local file = fs.open(fs.combine(basePath, fp), "r")
     if not file then
         error("Failed to open file")
     end
@@ -25,6 +30,9 @@ local function loadTasks(filename)
     file.close()
 
     local parsed = textutils.unserializeJSON(content)
+    if not parsed then
+        error("Failed to parse tasks")
+    end
     return parsed.tasks
 end
 
@@ -67,16 +75,20 @@ local function drawTask(task, indent)
 end
 
 local function getTasksFromGit(taskUrl)
-
+    
+    print("Getting tasks from " .. taskUrl)
     local url = taskUrl
     local res = http.get(url)
     if res then
         local data = res.readAll()
         res.close()
 
-        local f = fs.open("tasks.json", "w")
+        local f = fs.open(fs.combine(basePath, "tasks.json"), "w")
+        print("Writing tasks to " .. fs.combine(basePath, "tasks.json"))
         f.write(data)
         f.close()
+
+        return true
     else
         print("Failed to fetch tasks from GitHub.")
         return false
@@ -86,6 +98,7 @@ end
 local urls = loadUrls()
 
 local function displayTasks(taskList)
+    print("Displaying tasks")
     monitor.clear()
     monitor.setCursorPos(1, 1)
     for _, task in ipairs(taskList) do
