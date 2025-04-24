@@ -3,7 +3,7 @@
 
 local function loadUrls(filename)
     local fp = filename or "urls.json"
-    local file = fs.open(filename, "r")
+    local file = fs.open(fp, "r")
     if not file then
         error("Failed to open file")
     end
