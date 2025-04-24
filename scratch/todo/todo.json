@@ -1,0 +1,47 @@
+{
+    "tasks": [
+        {
+            "name": "Build Jetpack",
+            "subtasks": [
+                {
+                    "name": "Wood",
+                    "done": false
+                },
+                {
+                    "name": "Copper",
+                    "done": false
+                }
+            ]
+        },
+        {
+            "name": "Dire Things Pocket Generator",
+            "subtasks": [
+                {
+                    "name": "Goo",
+                    "done": false
+                },
+                {
+                    "name": "Ferro Ingot",
+                    "done": false
+                },
+                {
+                    "name": "Pocket Generator",
+                    "done": false
+                }
+            ]
+        },
+        {
+            "name": "Hostile Neural Nets",
+            "subtasks": [
+                {
+                    "name": "Get Ghast Data",
+                    "done": false
+                },
+                {
+                    "name": "Model Framework",
+                    "done": false
+                }
+            ]
+        }
+    ]
+}
