@@ -18,7 +18,7 @@
             "subtasks": [
                 {
                     "name": "Goo",
-                    "done": false
+                    "done": true
                 },
                 {
                     "name": "Ferro Ingot",
@@ -41,6 +41,16 @@
                     "name": "Model Framework",
                     "done": false
                 }
+            ]
+        }
+        {
+            "name": "Gateways",
+            "subtasks": [
+                {
+                    "name": "Gate Pearl - Endermen",
+                    "done": false
+                },
+                
             ]
         }
     ]
