@@ -1,0 +1,21 @@
+{
+    "tasks": [
+        {
+            "name": "Dire Things Pocket Generator",
+            "subtasks": [
+                {
+                    "name": "Goo",
+                    "done": true
+                },
+                {
+                    "name": "Ferro Ingot",
+                    "done": true
+                },
+                {
+                    "name": "Pocket Generator",
+                    "done": true
+                }
+            ]
+        }
+    ]
+}

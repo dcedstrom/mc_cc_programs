@@ -1,14 +1,10 @@
 {
     "tasks": [
         {
-            "name": "Build Jetpack",
+            "name": "Build Jetpack - Mekanism",
             "subtasks": [
                 {
-                    "name": "Wood",
-                    "done": false
-                },
-                {
-                    "name": "Copper",
+                    "name": "Armored",
                     "done": false
                 }
             ]
@@ -26,7 +22,7 @@
                 },
                 {
                     "name": "Pocket Generator",
-                    "done": false
+                    "done": true
                 }
             ]
         },
@@ -48,6 +44,19 @@
             "subtasks": [
                 {
                     "name": "Gate Pearl - Endermen",
+                    "done": false
+                }
+            ]
+        },
+        {
+            "name": "Extreme Reactors",
+            "subtasks": [
+                {
+                    "name": "Controller",
+                    "done": false
+                },
+                {
+                    "name": "Reactor",
                     "done": false
                 }
             ]
