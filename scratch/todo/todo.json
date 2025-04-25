@@ -22,7 +22,7 @@
                 },
                 {
                     "name": "Ferro Ingot",
-                    "done": false
+                    "done": true
                 },
                 {
                     "name": "Pocket Generator",
@@ -49,8 +49,7 @@
                 {
                     "name": "Gate Pearl - Endermen",
                     "done": false
-                },
-                
+                }
             ]
         }
     ]
