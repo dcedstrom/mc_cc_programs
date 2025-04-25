@@ -1,11 +1,24 @@
 {
     "tasks": [
         {
+            "name": "AE2",
+            "subtasks": [
+                {
+                    "name": "Build initial setup",
+                    "done": true
+                },
+                {
+                    "name": "Build storage",
+                    "done": true
+                }                    
+            ]
+        },
+        {
             "name": "Build Jetpack - Mekanism",
             "subtasks": [
                 {
                     "name": "Armored",
-                    "done": false
+                    "done": true
                 }
             ]
         },
@@ -53,10 +66,18 @@
             "subtasks": [
                 {
                     "name": "Controller",
-                    "done": false
+                    "done": true
                 },
                 {
                     "name": "Reactor",
+                    "done": true
+                },
+                {
+                    "name": "Computer Port",
+                    "done": false
+                },
+                {
+                    "name": "5x5 Expansion",
                     "done": false
                 }
             ]
