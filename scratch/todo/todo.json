@@ -4,6 +4,10 @@
             "name": "AE2",
             "subtasks": [
                 {
+                    "name": "Certus Gen to request blocks",
+                    "done": false
+                },
+                {
                     "name": "Ender IO - Sag Mill",
                     "done": false
                 },
