@@ -4,39 +4,17 @@
             "name": "AE2",
             "subtasks": [
                 {
-                    "name": "Build initial setup",
-                    "done": true
+                    "name": "Ender IO - Sag Mill",
+                    "done": false
                 },
                 {
-                    "name": "Build storage",
-                    "done": true
-                }                    
-            ]
-        },
-        {
-            "name": "Build Jetpack - Mekanism",
-            "subtasks": [
-                {
-                    "name": "Armored",
-                    "done": true
-                }
-            ]
-        },
-        {
-            "name": "Dire Things Pocket Generator",
-            "subtasks": [
-                {
-                    "name": "Goo",
-                    "done": true
+                    "name": "Ender IO - Alloy Smelter",
+                    "done": false
                 },
                 {
-                    "name": "Ferro Ingot",
-                    "done": true
-                },
-                {
-                    "name": "Pocket Generator",
-                    "done": true
-                }
+                    "name": "Blank Pattern Fabrication",
+                    "done": false
+                }      
             ]
         },
         {
@@ -64,14 +42,6 @@
         {
             "name": "Extreme Reactors",
             "subtasks": [
-                {
-                    "name": "Controller",
-                    "done": true
-                },
-                {
-                    "name": "Reactor",
-                    "done": true
-                },
                 {
                     "name": "Computer Port",
                     "done": false

@@ -16,6 +16,41 @@
                     "done": true
                 }
             ]
+        },
+        {
+            "name": "AE2",
+            "subtasks": [
+                {
+                    "name": "Build initial setup",
+                    "done": true
+                },
+                {
+                    "name": "Build storage",
+                    "done": true
+                }
+            ]
+        },
+        {
+            "name": "Build Jetpack - Mekanism",
+            "subtasks": [
+                {
+                    "name": "Armored",
+                    "done": true
+                }
+            ]
+        },
+        {
+            "name": "Extreme Reactors",
+            "subtasks": [
+                {
+                    "name": "Controller",
+                    "done": true
+                },
+                {
+                    "name": "Reactor",
+                    "done": true
+                }
+            ]
         }
     ]
 }
