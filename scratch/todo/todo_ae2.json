@@ -4,32 +4,27 @@
             "name": "Fundamentals",
             "subtasks": [
                 {
-                    "name": "Pistons",
-                    "done": false
-                },
-                {
-                    "name": "Crafting tables",
-                    "done": false
-                },
-                {
-                    "name": "Storage",
-                    "done": false
-                },
-                {
-                    "name": "Wires",
-                    "done": false
-                },
-                {
-                    "name": "Cores",
-                    "done": false
-                },
-                {
-                    "name": "Blank Patterns",
+                    "name": "Reaction chamber",
                     "done": false
                 }
-                
-                
             ]
-        }
+        },
+        {
+            "name": "Processing",
+            "subtasks": [
+                {
+                    "name": "Ore chain integration to storage",
+                    "done": false
+                },
+                {
+                    "name": "Alloy smelting",
+                    "done": false
+                },
+                {
+                    "name": "Mystical Agriculture to storage",
+                    "done": false
+                }
+            ]
+        }    
     ]
 }

@@ -1,0 +1,33 @@
+{
+    "tasks": [
+        {
+            "name": "Fundamentals",
+            "subtasks": [
+                {
+                    "name": "Pistons",
+                    "done": true
+                },
+                {
+                    "name": "Crafting tables",
+                    "done": true
+                },
+                {
+                    "name": "Storage",
+                    "done": true
+                },
+                {
+                    "name": "Wires",
+                    "done": true
+                },
+                {
+                    "name": "Cores",
+                    "done": true
+                },
+                {
+                    "name": "Blank Patterns",
+                    "done": true
+                }
+            ]
+        }
+    ]
+}
